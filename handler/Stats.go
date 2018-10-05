@@ -14,6 +14,7 @@ func GetStats(c *gin.Context) {
 	if err != nil {
 		log.Printf("Error calculating stats %v\n", err)
 		c.JSON(http.StatusInternalServerError, err)
+		return
 	}
 
 	c.JSON(http.StatusOK, stats)
