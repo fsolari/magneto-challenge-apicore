@@ -4,14 +4,15 @@ import (
 	"github.com/mercadolibre/test/magneto-challenge-apicore/util"
 )
 
+var DNACharSet = []string{"A", "T", "C", "G"}
+
 type DNA struct {
 	DNA    []string `json:"dna"`
 	Mutant bool
 }
 
-var DNACharSet = []string{"A", "T", "C", "G"}
-
 func IsDNAValid(dna DNA) bool {
+
 	if len(dna.DNA) < 3 {
 		return false
 	}
