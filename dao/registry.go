@@ -3,7 +3,6 @@ package dao
 import (
 	"github.com/mercadolibre/test/magneto-challenge-apicore/domain"
 	"log"
-	"github.com/mercadolibre/go-meli-toolkit/goutils/logger"
 )
 
 func GetStats() (domain.Stats, error) {
@@ -12,18 +11,17 @@ func GetStats() (domain.Stats, error) {
 
 	var stats domain.Stats
 
-	tx, err := db.Begin()
+	tx, err := db.Prepare("select count(ID) from mutant where Mutant = ? ")
 	if err != nil {
-		logger.Error("Failed to begin tx", err)
+		log.Printf("Failed to prepare query %s", err)
 		return stats, err
 	}
 
-	q := "select count(ID) from mutant where Mutant = "
-	err = tx.QueryRow(q + "0").Scan(&stats.CountHumanDna)
-	err = tx.QueryRow(q + "1").Scan(&stats.CountMutantDna)
+	err = tx.QueryRow("0").Scan(&stats.CountHumanDna)
+	err = tx.QueryRow("1").Scan(&stats.CountMutantDna)
 
 	if err != nil {
-		logger.Error("Failed to run query", err)
+		log.Printf("Failed to run query %s", err)
 		return stats, err
 	}
 
