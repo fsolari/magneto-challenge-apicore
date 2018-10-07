@@ -7,9 +7,13 @@ import (
 )
 
 func Start() {
+	SetupRouter()
+	loggerConfig()
+}
+
+func SetupRouter() *gin.Engine {
 	router := gin.Default()
 	mapUrls(router)
-	loggerConfig()
 	port := ":8080"
 	s := &http.Server{
 		Addr:           port,
@@ -18,4 +22,5 @@ func Start() {
 		WriteTimeout:   10 * time.Second,
 	}
 	s.ListenAndServe()
+	return router
 }
