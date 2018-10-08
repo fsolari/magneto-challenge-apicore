@@ -17,7 +17,7 @@ func SetupRouter() *gin.Engine {
 	router := gin.Default()
 	mapUrls(router)
 
-	port := os.Getenv("PORT")
+	port := os.Getenv("PORT") || 5000
 
 	if port == "" {
 		log.Fatal("$PORT must be set")
