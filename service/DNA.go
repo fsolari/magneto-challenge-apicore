@@ -25,7 +25,8 @@ func generateDNAMatrix(dna []string) [][]rune {
 	return matrix
 }
 
-func loopHorizontally(dnaMatrix [][]rune, rows int, columns int) {
+
+func loopHorizontally(dnaMatrix [][]rune, rows int, columns int) bool{
 
 	var x, y, i int
 
@@ -39,11 +40,15 @@ func loopHorizontally(dnaMatrix [][]rune, rows int, columns int) {
 				i = 0
 				break
 			}
+			if i == 3{
+				return true
+			}
 		}
 	}
+	return false
 }
 
-func loopVertically(dnaMatrix [][]rune, rows int, columns int) {
+func loopVertically(dnaMatrix [][]rune, rows int, columns int) bool {
 	var x, y, i int
 
 	for y = 0; y < rows; y++ {
@@ -56,11 +61,15 @@ func loopVertically(dnaMatrix [][]rune, rows int, columns int) {
 				i = 0
 				break
 			}
+			if i == 3{
+				return true
+			}
 		}
 	}
+	return false
 }
 
-func loopDiagonally(dnaMatrix [][]rune, rows int, columns int) {
+func loopDiagonally(dnaMatrix [][]rune, rows int, columns int) bool{
 
 	var x, y, i int
 
@@ -74,9 +83,13 @@ func loopDiagonally(dnaMatrix [][]rune, rows int, columns int) {
 					i = 0
 					break
 				}
+				if i == 3{
+					return true
+				}
 			}
 		}
 	}
+	return false
 }
 
 
@@ -85,16 +98,15 @@ func DNATest(dna domain.DNA) (bool, error) {
 	rows := len(dna.DNA)
 	columns := len(dna.DNA[0])
 
-	fmt.Printf("rows %d, columns %d \n", rows, columns)
-
 	dnaMatrix := generateDNAMatrix(dna.DNA)
 
 	fmt.Print(dnaMatrix)
 
 
-	loopHorizontally(dnaMatrix, rows, columns)
-	loopVertically(dnaMatrix, rows, columns)
-	loopDiagonally(dnaMatrix, rows, columns)
+	if loopHorizontally(dnaMatrix, rows, columns) || loopVertically(dnaMatrix, rows, columns) || loopDiagonally(dnaMatrix, rows, columns){
 
-	return true, nil
+		return true, nil
+	}
+
+	return false, nil
 }
