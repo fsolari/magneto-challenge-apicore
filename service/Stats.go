@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/mercadolibre/test/magneto-challenge-apicore/domain"
-	"github.com/mercadolibre/test/magneto-challenge-apicore/dao"
+	"github.com/mercadolibre/magneto-challenge-apicore/domain"
+	"github.com/mercadolibre/magneto-challenge-apicore/dao"
 	"log"
 	"math"
 )

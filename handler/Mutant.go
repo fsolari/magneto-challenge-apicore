@@ -3,8 +3,8 @@ package handler
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"github.com/mercadolibre/test/magneto-challenge-apicore/domain"
-	"github.com/mercadolibre/test/magneto-challenge-apicore/service"
+	"github.com/mercadolibre/magneto-challenge-apicore/domain"
+	"github.com/mercadolibre/magneto-challenge-apicore/service"
 )
 
 func IsMutant(c *gin.Context) {

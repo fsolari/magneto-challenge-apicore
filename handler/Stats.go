@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"github.com/gin-gonic/gin"
 	"log"
-	"github.com/mercadolibre/test/magneto-challenge-apicore/service"
+	"github.com/mercadolibre/magneto-challenge-apicore/service"
 )
 
 func GetStats(c *gin.Context) {

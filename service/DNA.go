@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/mercadolibre/test/magneto-challenge-apicore/domain"
 	"fmt"
+	"github.com/mercadolibre/magneto-challenge-apicore/domain"
 )
 
 func stringToRunesArray(dna string) []rune {
