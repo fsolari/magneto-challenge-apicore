@@ -107,7 +107,7 @@ func DNATest(dna domain.DNA) (bool, error) {
 	err := dao.InsertDNA(dna)
 	if err != nil {
 		log.Printf("Error saving DNA registry on DB %v\n", err)
-		return dna.Mutant, err
 	}
-	return dna.Mutant, nil
+
+	return dna.Mutant, err
 }

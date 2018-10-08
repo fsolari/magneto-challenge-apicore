@@ -26,8 +26,6 @@ func GetStats() (domain.Stats, error) {
 		return stats, err
 	}
 
-	log.Printf("STATS INT %d %d", stats.CountHumanDna, stats.CountMutantDna)
-
 	return stats, nil
 }
 

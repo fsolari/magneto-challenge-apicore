@@ -24,9 +24,9 @@ func IsMutant(c *gin.Context) {
 	}
 
 	if !isMutant {
-		c.Status(http.StatusBadRequest)
+		c.JSON(http.StatusBadRequest, isMutant)
 	} else {
-		c.Status(http.StatusOK)
+		c.JSON(http.StatusOK, isMutant)
 	}
 
 }
