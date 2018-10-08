@@ -5,7 +5,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"fmt"
 	"os"
-	"github.com/mercadolibre/test/magneto-challenge-apicore/domain"
+	"github.com/mercadolibre/magneto-challenge-apicore/domain"
 	"encoding/json"
 	"log"
 )
