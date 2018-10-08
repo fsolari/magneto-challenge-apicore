@@ -4,6 +4,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"time"
 	"net/http"
+	"os"
+	"log"
 )
 
 func Start() {
@@ -14,7 +16,13 @@ func Start() {
 func SetupRouter() *gin.Engine {
 	router := gin.Default()
 	mapUrls(router)
-	port := ":8080"
+
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
+
 	s := &http.Server{
 		Addr:           port,
 		Handler:        router,
