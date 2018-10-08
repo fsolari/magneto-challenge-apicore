@@ -25,7 +25,7 @@ func generateDNAMatrix(dna []string) [][]rune {
 	return matrix
 }
 
-func loopHorizontally(dnaMatrix [][]rune, rows int, columns int, mutantDNA chan bool) {
+func loopHorizontally(dnaMatrix [][]rune, rows int, columns int) {
 
 	var x, y, i int
 
@@ -39,13 +39,11 @@ func loopHorizontally(dnaMatrix [][]rune, rows int, columns int, mutantDNA chan 
 				i = 0
 				break
 			}
-			writeChannel(i, mutantDNA)
 		}
 	}
-	mutantDNA <- false
 }
 
-func loopVertically(dnaMatrix [][]rune, rows int, columns int, mutantDNA chan bool) {
+func loopVertically(dnaMatrix [][]rune, rows int, columns int) {
 	var x, y, i int
 
 	for y = 0; y < rows; y++ {
@@ -58,13 +56,11 @@ func loopVertically(dnaMatrix [][]rune, rows int, columns int, mutantDNA chan bo
 				i = 0
 				break
 			}
-			writeChannel(i, mutantDNA)
 		}
 	}
-	mutantDNA <- false
 }
 
-func loopDiagonally(dnaMatrix [][]rune, rows int, columns int, mutantDNA chan bool) {
+func loopDiagonally(dnaMatrix [][]rune, rows int, columns int) {
 
 	var x, y, i int
 
@@ -78,24 +74,14 @@ func loopDiagonally(dnaMatrix [][]rune, rows int, columns int, mutantDNA chan bo
 					i = 0
 					break
 				}
-				writeChannel(i, mutantDNA)
 			}
 		}
 	}
-	mutantDNA <- false
 }
 
-
-func writeChannel(i int, mutantDNA chan bool) {
-	if i == 3 {
-		mutantDNA <- true
-		close(mutantDNA)
-	}
-}
 
 func DNATest(dna domain.DNA) (bool, error) {
 
-	mutantDNA := make(chan bool, 1)
 	rows := len(dna.DNA)
 	columns := len(dna.DNA[0])
 
@@ -105,19 +91,10 @@ func DNATest(dna domain.DNA) (bool, error) {
 
 	fmt.Print(dnaMatrix)
 
-	go loopHorizontally(dnaMatrix, rows, columns, mutantDNA)
-	go loopVertically(dnaMatrix, rows, columns, mutantDNA)
-	go loopDiagonally(dnaMatrix, rows, columns, mutantDNA)
 
-	select {
-	case <-mutantDNA:
-	case mutantDNA <- true:
-		fmt.Println("OKURRR")
-	default:
-		fmt.Println("NONE")
-	}
-
-	<-mutantDNA
+	loopHorizontally(dnaMatrix, rows, columns)
+	loopVertically(dnaMatrix, rows, columns)
+	loopDiagonally(dnaMatrix, rows, columns)
 
 	return true, nil
 }
