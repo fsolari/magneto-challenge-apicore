@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"log"
+	"fmt"
 )
 
 func Start() {
@@ -17,18 +18,21 @@ func SetupRouter() *gin.Engine {
 	router := gin.Default()
 	mapUrls(router)
 
-	port := os.Getenv("PORT") || 5000
-
-	if port == "" {
-		log.Fatal("$PORT must be set")
-	}
-
 	s := &http.Server{
-		Addr:           port,
+		Addr:           ":" + getPort(),
 		Handler:        router,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 	}
 	s.ListenAndServe()
 	return router
+}
+
+func getPort() string {
+	var port = os.Getenv("PORT")
+	if port == "" {
+		port = "500"
+		fmt.Println("INFO: No PORT environment variable detected, defaulting to " + port)
+	}
+	return ":" + port
 }
