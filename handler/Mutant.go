@@ -12,8 +12,8 @@ func IsMutant(c *gin.Context) {
 	bindErr := c.BindJSON(&dna)
 
 	if bindErr != nil || !domain.IsDNAValid(dna) {
-		errMSG := "Failed to process request: DNA format invalid."
-		c.JSON(http.StatusBadRequest, errMSG)
+		err := "Failed to process request: DNA format invalid."
+		c.JSON(http.StatusBadRequest, err)
 		return
 	}
 
@@ -23,11 +23,10 @@ func IsMutant(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, err)
 	}
 
-	MSG := "DNA: "
 	if !isMutant {
-		c.JSON(http.StatusBadRequest, MSG + "Human.")
+		c.Status(http.StatusBadRequest)
 	} else {
-		c.JSON(http.StatusOK, MSG + "Mutant.")
+		c.Status(http.StatusOK)
 	}
 
 }

@@ -3,6 +3,7 @@ package dao
 import (
 	"github.com/mercadolibre/magneto-challenge-apicore/domain"
 	"log"
+	"strings"
 )
 
 func GetStats() (domain.Stats, error) {
@@ -45,7 +46,8 @@ func InsertDNA(dna domain.DNA) error {
 		return err
 	}
 
-	_, err = stmt.Exec(dna.DNA, dna.Mutant)
+	dnaString := strings.Join(dna.DNA, " ")
+	_, err = stmt.Exec(dnaString, dna.Mutant)
 	if err != nil {
 		log.Printf("ERROR", err)
 		return err

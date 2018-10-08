@@ -1,8 +1,9 @@
 package service
 
 import (
-	"fmt"
 	"github.com/mercadolibre/magneto-challenge-apicore/domain"
+	"github.com/mercadolibre/magneto-challenge-apicore/dao"
+	"log"
 )
 
 func stringToRunesArray(dna string) []rune {
@@ -25,8 +26,7 @@ func generateDNAMatrix(dna []string) [][]rune {
 	return matrix
 }
 
-
-func loopHorizontally(dnaMatrix [][]rune, rows int, columns int) bool{
+func loopHorizontally(dnaMatrix [][]rune, rows int, columns int) bool {
 
 	var x, y, i int
 
@@ -40,7 +40,7 @@ func loopHorizontally(dnaMatrix [][]rune, rows int, columns int) bool{
 				i = 0
 				break
 			}
-			if i == 3{
+			if i == 3 {
 				return true
 			}
 		}
@@ -61,7 +61,7 @@ func loopVertically(dnaMatrix [][]rune, rows int, columns int) bool {
 				i = 0
 				break
 			}
-			if i == 3{
+			if i == 3 {
 				return true
 			}
 		}
@@ -69,7 +69,7 @@ func loopVertically(dnaMatrix [][]rune, rows int, columns int) bool {
 	return false
 }
 
-func loopDiagonally(dnaMatrix [][]rune, rows int, columns int) bool{
+func loopDiagonally(dnaMatrix [][]rune, rows int, columns int) bool {
 
 	var x, y, i int
 
@@ -83,7 +83,7 @@ func loopDiagonally(dnaMatrix [][]rune, rows int, columns int) bool{
 					i = 0
 					break
 				}
-				if i == 3{
+				if i == 3 {
 					return true
 				}
 			}
@@ -92,21 +92,22 @@ func loopDiagonally(dnaMatrix [][]rune, rows int, columns int) bool{
 	return false
 }
 
-
 func DNATest(dna domain.DNA) (bool, error) {
 
 	rows := len(dna.DNA)
 	columns := len(dna.DNA[0])
 
 	dnaMatrix := generateDNAMatrix(dna.DNA)
+	dna.Mutant = false
 
-	fmt.Print(dnaMatrix)
-
-
-	if loopHorizontally(dnaMatrix, rows, columns) || loopVertically(dnaMatrix, rows, columns) || loopDiagonally(dnaMatrix, rows, columns){
-
-		return true, nil
+	if loopHorizontally(dnaMatrix, rows, columns) || loopVertically(dnaMatrix, rows, columns) || loopDiagonally(dnaMatrix, rows, columns) {
+		dna.Mutant = true
 	}
 
-	return false, nil
+	err := dao.InsertDNA(dna)
+	if err != nil {
+		log.Printf("Error saving DNA registry on DB %v\n", err)
+		return dna.Mutant, err
+	}
+	return dna.Mutant, nil
 }
