@@ -1,6 +1,6 @@
 # magneto-challenge-apicore
 
-## Tags API calls
+## API calls
 
 ### Examples
 
