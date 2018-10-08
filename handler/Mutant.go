@@ -18,9 +18,8 @@ func IsMutant(c *gin.Context) {
 	}
 
 	isMutant, err := service.DNATest(dna)
-
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, err)
+		c.JSON(http.StatusBadRequest, err.Error())
 	}
 
 	if !isMutant {

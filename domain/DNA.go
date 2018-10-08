@@ -7,7 +7,7 @@ import (
 var DNACharSet = []string{"A", "T", "C", "G"}
 
 type DNA struct {
-	DNA    []string `json:"dna"`
+	DNA    []string `json:"dna;sql:"not null;unique"`
 	Mutant bool
 }
 
