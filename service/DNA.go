@@ -4,6 +4,7 @@ import (
 	"github.com/mercadolibre/magneto-challenge-apicore/domain"
 	"github.com/mercadolibre/magneto-challenge-apicore/dao"
 	"log"
+	"time"
 )
 
 func stringToRunesArray(dna string) []rune {
@@ -26,7 +27,7 @@ func generateDNAMatrix(dna []string) [][]rune {
 	return matrix
 }
 
-func loopHorizontally(dnaMatrix [][]rune, rows int, columns int) bool {
+func loopHorizontally(dnaMatrix [][]rune, rows int, columns int, sequence chan bool, done chan bool) {
 
 	var x, y, i int
 
@@ -41,14 +42,14 @@ func loopHorizontally(dnaMatrix [][]rune, rows int, columns int) bool {
 				break
 			}
 			if i == 3 {
-				return true
+				sequence <- true
 			}
 		}
 	}
-	return false
+	done <- true
 }
 
-func loopVertically(dnaMatrix [][]rune, rows int, columns int) bool {
+func loopVertically(dnaMatrix [][]rune, rows int, columns int, sequence chan bool, done chan bool) {
 	var x, y, i int
 
 	for y = 0; y < rows; y++ {
@@ -62,14 +63,14 @@ func loopVertically(dnaMatrix [][]rune, rows int, columns int) bool {
 				break
 			}
 			if i == 3 {
-				return true
+				sequence <- true
 			}
 		}
 	}
-	return false
+	done <- true
 }
 
-func loopDiagonally(dnaMatrix [][]rune, rows int, columns int) bool {
+func loopDiagonally(dnaMatrix [][]rune, rows int, sequence chan bool, done chan bool) {
 
 	var x, y, i int
 
@@ -84,25 +85,17 @@ func loopDiagonally(dnaMatrix [][]rune, rows int, columns int) bool {
 					break
 				}
 				if i == 3 {
-					return true
+					sequence <- true
 				}
 			}
 		}
 	}
-	return false
+	done <- true
 }
 
 func DNATest(dna domain.DNA) (bool, error) {
 
-	rows := len(dna.DNA)
-	columns := len(dna.DNA[0])
-
-	dnaMatrix := generateDNAMatrix(dna.DNA)
-	dna.Mutant = false
-
-	if loopHorizontally(dnaMatrix, rows, columns) || loopVertically(dnaMatrix, rows, columns) || loopDiagonally(dnaMatrix, rows, columns) {
-		dna.Mutant = true
-	}
+	dna.Mutant = handleMatrix(dna)
 
 	err := dao.InsertDNA(dna)
 	if err != nil {
@@ -110,4 +103,33 @@ func DNATest(dna domain.DNA) (bool, error) {
 	}
 
 	return dna.Mutant, err
+}
+
+func handleMatrix(dna domain.DNA) bool {
+	sequence := make(chan bool)
+	done := make(chan bool)
+	rows := len(dna.DNA)
+	columns := len(dna.DNA[0])
+
+	dnaMatrix := generateDNAMatrix(dna.DNA)
+
+	go loopHorizontally(dnaMatrix, rows, columns, sequence, done)
+	go loopVertically(dnaMatrix, rows, columns, sequence, done)
+	go loopDiagonally(dnaMatrix, rows, sequence, done)
+
+	for i := 0; i <= 2; i++ {
+		select {
+		case <-sequence:
+			if i == 1 {
+				return true
+			}
+		case <-done:
+			time.Sleep(2 * time.Millisecond)
+			if i == 2 {
+				return false
+			}
+		}
+	}
+
+	return false
 }
