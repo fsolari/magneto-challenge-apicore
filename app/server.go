@@ -31,7 +31,7 @@ func SetupRouter() *gin.Engine {
 func getPort() string {
 	var port = os.Getenv("PORT")
 	if port == "" {
-		port = "500"
+		port = "5000"
 		fmt.Println("INFO: No PORT environment variable detected, defaulting to " + port)
 	}
 	return ":" + port
