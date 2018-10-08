@@ -3,6 +3,10 @@
 	"ignore": "test",
 	"package": [
 		{
+			"path": "appengine/cloudsql",
+			"revision": ""
+		},
+		{
 			"checksumSHA1": "dvabztWVQX8f6oMLRyv4dLH+TGY=",
 			"origin": "github.com/stretchr/testify/vendor/github.com/davecgh/go-spew/spew",
 			"path": "github.com/davecgh/go-spew/spew",
@@ -52,46 +56,24 @@
 			"revisionTime": "2017-09-02T00:04:52Z"
 		},
 		{
+			"checksumSHA1": "xnz61Omintrn+UB/Rv2Hh5BgTZw=",
+			"path": "github.com/json-iterator/go",
+			"revision": "2433035e513208b0f7bd5b50d0aecd889b2c1ff8",
+			"revisionTime": "2018-09-14T01:48:43Z"
+		},
+		{
 			"checksumSHA1": "U6lX43KDDlNOn+Z0Yyww+ZzHfFo=",
 			"path": "github.com/mattn/go-isatty",
 			"revision": "fc9e8d8ef48496124e79ae0df75490096eccf6fe",
 			"revisionTime": "2017-03-22T23:44:13Z"
 		},
 		{
-			"checksumSHA1": "vGHlFqaC5wHhBZED9MVSIYwylO4=",
-			"path": "github.com/mercadolibre/test/magneto-challenge-apicore/app",
-			"revision": "4392357d84532076a0029944f6a4d28aa6c3f848",
-			"revisionTime": "2018-10-08T01:45:52Z"
+			"path": "github.com/modern-go/concurrent",
+			"revision": ""
 		},
 		{
-			"checksumSHA1": "mEk89oRdUi8zraap8cbyYdl6f/w=",
-			"path": "github.com/mercadolibre/test/magneto-challenge-apicore/dao",
-			"revision": "4392357d84532076a0029944f6a4d28aa6c3f848",
-			"revisionTime": "2018-10-08T01:45:52Z"
-		},
-		{
-			"checksumSHA1": "Qz+trq6cjSjHFFb6H4D2aM74T8w=",
-			"path": "github.com/mercadolibre/test/magneto-challenge-apicore/domain",
-			"revision": "4392357d84532076a0029944f6a4d28aa6c3f848",
-			"revisionTime": "2018-10-08T01:45:52Z"
-		},
-		{
-			"checksumSHA1": "3rf1KdMtSaiE31CDHtrJGq5vxdQ=",
-			"path": "github.com/mercadolibre/test/magneto-challenge-apicore/handler",
-			"revision": "4392357d84532076a0029944f6a4d28aa6c3f848",
-			"revisionTime": "2018-10-08T01:45:52Z"
-		},
-		{
-			"checksumSHA1": "D1WECtUcd/4JyjjHeMkMf6BQIb8=",
-			"path": "github.com/mercadolibre/test/magneto-challenge-apicore/service",
-			"revision": "4392357d84532076a0029944f6a4d28aa6c3f848",
-			"revisionTime": "2018-10-08T01:45:52Z"
-		},
-		{
-			"checksumSHA1": "wxwsMX628nbOcIusED/qTlhMzdc=",
-			"path": "github.com/mercadolibre/test/magneto-challenge-apicore/util",
-			"revision": "4392357d84532076a0029944f6a4d28aa6c3f848",
-			"revisionTime": "2018-10-08T01:45:52Z"
+			"path": "github.com/modern-go/reflect2",
+			"revision": ""
 		},
 		{
 			"checksumSHA1": "LuFv4/jlrmFNnDb/5SCSEPAM9vU=",
