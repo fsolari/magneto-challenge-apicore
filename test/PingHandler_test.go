@@ -5,7 +5,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
-	"github.com/mercadolibre/test/magneto-challenge-apicore/app"
+	"github.com/mercadolibre/magneto-challenge-apicore/app"
 	"strings"
 	"log"
 )

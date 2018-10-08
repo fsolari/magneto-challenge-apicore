@@ -4,7 +4,7 @@ import (
 	"testing"
 	"fmt"
 	"github.com/stretchr/testify/assert"
-	"github.com/mercadolibre/test/magneto-challenge-apicore/util"
+	"github.com/mercadolibre/magneto-challenge-apicore/util"
 )
 
 func TestStringContainsIfPresentMustReturnTrue(t *testing.T) {
