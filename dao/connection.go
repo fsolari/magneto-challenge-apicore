@@ -30,6 +30,7 @@ func Connect() (*sql.DB, error) {
 
 func getConfiguration() (domain.Configuration, error) {
 	var config domain.Configuration
+
 	u, err := url.Parse(os.Getenv("JAWSDB_URL"))
 	if err != nil {
 		panic(err)
