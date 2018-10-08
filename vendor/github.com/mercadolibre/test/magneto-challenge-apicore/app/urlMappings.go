@@ -3,7 +3,6 @@ package app
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/mercadolibre/test/magneto-challenge-apicore/handler"
-	"net/http"
 )
 
 func mapUrls(router *gin.Engine){

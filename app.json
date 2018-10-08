@@ -1,0 +1,9 @@
+{
+  "name": "Magneto App",
+  "description": "APICore Challenge",
+  "keywords": [
+    "go"
+  ],
+  "website": "http://github.com/fsolari/magneto-challenge-apicore",
+  "repository": "http://github.com/fsolari/magneto-challenge-apicore"
+}

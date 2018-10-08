@@ -1,0 +1,1 @@
+web: magneto-challenge-apicore
