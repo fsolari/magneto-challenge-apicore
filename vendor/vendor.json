@@ -1,6 +1,9 @@
 {
 	"comment": "",
 	"ignore": "test",
+	"heroku": {
+		"goVersion": "go1.9.1"
+	},
 	"package": [
 		{
 			"path": "appengine/cloudsql",
