@@ -18,7 +18,7 @@ func SetupRouter() *gin.Engine {
 	mapUrls(router)
 
 	s := &http.Server{
-		Addr:           ":" + getPort(),
+		Addr:           getPort(),
 		Handler:        router,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
