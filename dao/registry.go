@@ -11,7 +11,7 @@ func GetStats() (domain.Stats, error) {
 
 	var stats domain.Stats
 
-	tx, err := db.Prepare("select count(ID) from mutant where Mutant = ? ")
+	tx, err := db.Prepare("select count(ID) from Mutant where Mutant = ? ")
 	if err != nil {
 		log.Printf("Failed to prepare query %s", err)
 		return stats, err

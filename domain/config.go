@@ -1,5 +1,6 @@
 package domain
 
+
 type Configuration struct {
 	Engine   string
 	Server   string
@@ -7,9 +8,4 @@ type Configuration struct {
 	User     string
 	Password string
 	Database string
-}
-
-type Error struct {
-	err error
-	msg string
 }

@@ -3,11 +3,13 @@ package dao
 import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
-	"fmt"
 	"os"
-	"github.com/mercadolibre/magneto-challenge-apicore/domain"
-	"encoding/json"
 	"log"
+	"strings"
+	"fmt"
+	"net/url"
+	"github.com/mercadolibre/magneto-challenge-apicore/domain"
+	"net"
 )
 
 func Connect() (*sql.DB, error) {
@@ -27,19 +29,17 @@ func Connect() (*sql.DB, error) {
 }
 
 func getConfiguration() (domain.Configuration, error) {
-	config := domain.Configuration{}
-	file, err := os.Open("./config.json")
+	var config domain.Configuration
+	u, err := url.Parse(os.Getenv("JAWSDB_URL"))
 	if err != nil {
-		log.Printf("ERROR", err)
-		return config, err
+		panic(err)
 	}
-	defer file.Close()
-	decoder := json.NewDecoder(file)
-	err = decoder.Decode(&config)
-	if err != nil {
-		log.Printf("ERROR", err)
-		return config, err
-	}
+
+	config.Engine = u.Scheme
+	config.User = u.User.Username()
+	config.Password, _ = u.User.Password()
+	config.Server, config.Port, _ = net.SplitHostPort(u.Host)
+	config.Database = strings.Trim(u.Path, "/")
 
 	return config, nil
 }
