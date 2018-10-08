@@ -23,7 +23,7 @@ func IsMutant(c *gin.Context) {
 	}
 
 	if !isMutant {
-		c.JSON(http.StatusBadRequest, isMutant)
+		c.JSON(http.StatusForbidden, isMutant)
 	} else {
 		c.JSON(http.StatusOK, isMutant)
 	}
