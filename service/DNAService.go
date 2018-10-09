@@ -3,35 +3,29 @@ package service
 import (
 	"github.com/mercadolibre/magneto-challenge-apicore/domain"
 	"github.com/mercadolibre/magneto-challenge-apicore/dao"
-	"log"
-	_"time"
 	"time"
 	"github.com/mercadolibre/magneto-challenge-apicore/util"
 )
 
 func DNATest(dna domain.DNA) (bool, error) {
 
-	dna.Mutant = isMutant(dna)
+	cols := len(dna.DNA[0])
+	DNA := util.GenerateMatrixFromStringArray(dna.DNA)
 
-	err := dao.InsertDNA(dna)
-	if err != nil {
-		log.Printf("[DNAService.DNATest] Error inserting DNA on DB : %s ", err)
-	}
+	dna.Mutant = isMutant(DNA, cols)
 
-	return dna.Mutant, err
+	return dna.Mutant, dao.InsertDNA(dna)
+
 }
 
-func isMutant(dna domain.DNA) bool {
+func isMutant(DNA [][]rune, cols int) bool {
+
 	sequence := make(chan bool)
 	done := make(chan bool)
-	rows := len(dna.DNA)
-	columns := len(dna.DNA[0])
 
-	dnaMatrix := util.GenerateMatrixFromStringArray(dna.DNA)
-
-	go loopHorizontally(dnaMatrix, rows, columns, sequence, done)
-	go loopVertically(dnaMatrix, rows, columns, sequence, done)
-	go loopDiagonally(dnaMatrix, rows, sequence, done)
+	go loopHorizontally(DNA, cols, sequence, done)
+	go loopVertically(DNA, cols, sequence, done)
+	go loopDiagonally(DNA, sequence, done)
 
 	for i := 0; i <= 2; i++ {
 		select {
@@ -49,15 +43,15 @@ func isMutant(dna domain.DNA) bool {
 	return false
 }
 
-func loopHorizontally(dnaMatrix [][]rune, rows int, columns int, sequence chan bool, done chan bool) {
+func loopHorizontally(DNA [][]rune, cols int, sequence chan bool, done chan bool) {
 
 	var x, y, i int
 
-	for x = 0; x < columns; x++ {
+	for x = 0; x < cols; x++ {
 
-		for y = 0; y < rows - 1; y++ {
+		for y = 0; y < len(DNA) - 1; y++ {
 
-			if checkCondition(dnaMatrix[x][y], dnaMatrix[x][y + 1], i) {
+			if checkCondition(DNA[x][y], DNA[x][y + 1], i) {
 				i++
 			} else {
 				i = 0
@@ -69,14 +63,14 @@ func loopHorizontally(dnaMatrix [][]rune, rows int, columns int, sequence chan b
 	done <- true
 }
 
-func loopVertically(dnaMatrix [][]rune, rows int, columns int, sequence chan bool, done chan bool) {
+func loopVertically(DNA [][]rune, cols int, sequence chan bool, done chan bool) {
 	var x, y, i int
 
-	for y = 0; y < rows; y++ {
+	for y = 0; y < len(DNA); y++ {
 
-		for x = 0; x < columns - 1; x++ {
+		for x = 0; x < cols - 1; x++ {
 
-			if checkCondition(dnaMatrix[x][y], dnaMatrix[x + 1][y], i) {
+			if checkCondition(DNA[x][y], DNA[x + 1][y], i) {
 				i++
 			} else {
 				i = 0
@@ -88,14 +82,14 @@ func loopVertically(dnaMatrix [][]rune, rows int, columns int, sequence chan boo
 	done <- true
 }
 
-func loopDiagonally(dnaMatrix [][]rune, rows int, sequence chan bool, done chan bool) {
+func loopDiagonally(DNA [][]rune, sequence chan bool, done chan bool) {
 
 	var x, y, i int
 
-	for x = 0; x < rows - 1; x++ {
-		for y = 0; y < rows - 1; y++ {
+	for x = 0; x < len(DNA) - 1; x++ {
+		for y = 0; y < len(DNA) - 1; y++ {
 			if x == y {
-				if checkCondition(dnaMatrix[x][y], dnaMatrix[x + 1][y + 1], i) {
+				if checkCondition(DNA[x][y], DNA[x + 1][y + 1], i) {
 					i++
 				} else {
 					i = 0
