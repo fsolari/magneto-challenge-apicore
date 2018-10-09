@@ -18,7 +18,7 @@ func IsDNAValid(dna DNA) bool {
 	}
 	for _, str := range dna.DNA {
 		for _, char := range str {
-			if !util.Contains(DNACharSet, string(char)) {
+			if !util.StringArrayContains(DNACharSet, string(char)) {
 				return false
 			}
 		}
