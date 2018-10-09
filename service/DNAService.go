@@ -27,6 +27,11 @@ func isMutant(DNA [][]rune, cols int) bool {
 	go loopVertically(DNA, cols, sequence, done)
 	go loopDiagonally(DNA, sequence, done)
 
+	return channelReader(sequence, done)
+}
+
+func channelReader(sequence chan bool, done chan bool) bool {
+
 	for i := 0; i <= 2; i++ {
 		select {
 		case <-sequence:
@@ -39,6 +44,9 @@ func isMutant(DNA [][]rune, cols int) bool {
 			}
 		}
 	}
+	
+	close(sequence)
+	close(done)
 
 	return false
 }
