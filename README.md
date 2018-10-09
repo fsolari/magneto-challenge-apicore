@@ -7,10 +7,9 @@ This API will help Magneto find out if a human is a mutant, basing on it's ADN s
 ADN is a NxN matrix of chars. Available chars are: A,T,C,G
 A mutant ADN contains more than one sequence of consecutive chars in horizontal, vertical or diagonal direction.
 
-Golang 1.9.1
+Written in Golang 1.9.1, deployed on Heroku and provisioned with a JawsDB MySQL.
 
 ## Demo
-
 
 https://magneto-challenge-apicore.herokuapp.com
 
@@ -39,3 +38,7 @@ Response
 	    "count_human_dna":2,
 	    "ratio":0.66
     }
+
+## Benchmark
+
+
