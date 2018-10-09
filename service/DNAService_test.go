@@ -57,20 +57,62 @@ func TestLoopHorizontallyIfNoSequenceMustSendToDoneChannel(t *testing.T) {
 	assert.Equal(t, false, ok, fmt.Sprintf("ok must be false %v", ok))
 }
 
-func TestLoopVerticallyMustSendToBothChannelsOnSequence(t *testing.T) {
+func TestLoopVerticallyMustSendToChannelSequenceBeforeDone(t *testing.T) {
+
+	var matrix = [][]rune{{65, 65, 71, 67, 71, 65}, {65, 65, 71, 84, 71, 67}, {65, 84, 65, 84, 71, 84}, {65, 71, 65, 67, 71, 71}, {67, 67, 67, 67, 84, 65}, {84, 67, 65, 67, 84, 71}}
+
+	cols := len(matrix)
+
+	sequence := make(chan bool)
+	done := make(chan bool)
+
+	go loopVertically(matrix, cols, sequence, done)
+
+	ok := readChannels(sequence, done)
+
+	assert.Equal(t, true, ok, fmt.Sprintf("ok must be true %v", ok))
+}
+
+func TestLoopVerticallyIfNoSequenceMustSendToDoneChannel(t *testing.T) {
+	var matrix = [][]rune{{71, 65, 71, 67, 71, 65}, {65, 65, 71, 84, 71, 67}, {65, 84, 65, 84, 71, 84}, {65, 71, 65, 67, 65, 71}, {67, 67, 67, 67, 84, 65}, {84, 67, 65, 67, 84, 71}}
+
+	cols := len(matrix)
+
+	sequence := make(chan bool)
+	done := make(chan bool)
+
+	go loopVertically(matrix, cols, sequence, done)
+
+	ok := readChannels(sequence, done)
+
+	assert.Equal(t, false, ok, fmt.Sprintf("ok must be false %v", ok))
+}
+
+func TestLoopDiagonallyMustSendToChannelSequenceBeforeDone(t *testing.T) {
+	var matrix = [][]rune{{71, 65, 71, 67, 71, 65}, {71, 71, 71, 84, 71, 67}, {65, 84, 71, 84, 71, 84}, {65, 71, 65, 71, 65, 71}, {67, 67, 67, 67, 84, 65}, {84, 67, 65, 67, 84, 71}}
+
+	sequence := make(chan bool)
+	done := make(chan bool)
+
+	go loopDiagonally(matrix, sequence, done)
+
+	ok := readChannels(sequence, done)
+
+	assert.Equal(t, true, ok, fmt.Sprintf("ok must be true %v", true))
 
 }
 
-func TestLoopVerticallyMustSendToDoneChannelAlways(t *testing.T) {
+func TestLoopDiagonallyIfNoSequenceMustSendToDoneChannel(t *testing.T) {
+	var matrix = [][]rune{{71, 65, 71, 67, 71, 65}, {65, 65, 71, 84, 71, 67}, {65, 84, 65, 84, 71, 84}, {65, 71, 65, 67, 65, 71}, {67, 67, 67, 67, 84, 65}, {84, 67, 65, 67, 84, 71}}
+	
+	sequence := make(chan bool)
+	done := make(chan bool)
 
-}
+	go loopDiagonally(matrix, sequence, done)
 
-func TestLoopDiagonallyMustSendToBothChannelsOnSequence(t *testing.T) {
+	ok := readChannels(sequence, done)
 
-}
-
-func TestLoopDiagonallyMustSendToDoneChannelAlways(t *testing.T) {
-
+	assert.Equal(t, false, ok, fmt.Sprintf("ok must be false %v", ok))
 }
 
 func TestCheckConditionIfMeetConditionReturnTrue(t *testing.T) {}
