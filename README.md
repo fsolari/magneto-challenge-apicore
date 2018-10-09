@@ -1,4 +1,4 @@
-# magneto-challenge-apicore
+# Magneto API
 
 Magneto wants to recruit as much mutants as possible to fight the X-Men.
 
