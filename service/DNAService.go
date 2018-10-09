@@ -44,9 +44,6 @@ func channelReader(sequence chan bool, done chan bool) bool {
 			}
 		}
 	}
-	
-	close(sequence)
-	close(done)
 
 	return false
 }
@@ -105,7 +102,7 @@ func loopDiagonally(DNA [][]rune, sequence chan bool, done chan bool) {
 				}
 				onSequenceSendTrue(i, 3, sequence)
 			}
-		}
+		}m
 	}
 	time.Sleep(3 * time.Millisecond)
 	done <- true
