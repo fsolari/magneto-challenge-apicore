@@ -4,6 +4,7 @@ import (
 	"github.com/mercadolibre/magneto-challenge-apicore/domain"
 	"github.com/mercadolibre/magneto-challenge-apicore/dao"
 	"log"
+	_"time"
 	"time"
 )
 
@@ -35,18 +36,29 @@ func loopHorizontally(dnaMatrix [][]rune, rows int, columns int, sequence chan b
 
 		for y = 0; y < rows - 1; y++ {
 
-			if dnaMatrix[x][y] == dnaMatrix[x][y + 1] && i < 4 {
+			if checkCondition(dnaMatrix[x][y], dnaMatrix[x][y + 1], i) {
 				i++
 			} else {
 				i = 0
 				break
 			}
-			if i == 3 {
-				sequence <- true
-			}
+			checkIndex(i, sequence)
 		}
 	}
 	done <- true
+}
+
+func checkIndex(i int, sequence chan bool) {
+	if i == 3 {
+		sequence <- true
+	}
+}
+
+func checkCondition(a rune, b rune, i int) bool {
+	if a == b && i < 4 {
+		return true
+	}
+	return false
 }
 
 func loopVertically(dnaMatrix [][]rune, rows int, columns int, sequence chan bool, done chan bool) {
@@ -56,15 +68,13 @@ func loopVertically(dnaMatrix [][]rune, rows int, columns int, sequence chan boo
 
 		for x = 0; x < columns - 1; x++ {
 
-			if dnaMatrix[x][y] == dnaMatrix[x + 1][y] && i < 4 {
+			if checkCondition(dnaMatrix[x][y], dnaMatrix[x + 1][y], i) {
 				i++
 			} else {
 				i = 0
 				break
 			}
-			if i == 3 {
-				sequence <- true
-			}
+			checkIndex(i, sequence)
 		}
 	}
 	done <- true
@@ -77,16 +87,13 @@ func loopDiagonally(dnaMatrix [][]rune, rows int, sequence chan bool, done chan 
 	for x = 0; x < rows - 1; x++ {
 		for y = 0; y < rows - 1; y++ {
 			if x == y {
-
-				if dnaMatrix[x][y] == dnaMatrix[x + 1][y + 1] && i < 4 {
+				if checkCondition(dnaMatrix[x][y], dnaMatrix[x + 1][y + 1], i) {
 					i++
 				} else {
 					i = 0
 					break
 				}
-				if i == 3 {
-					sequence <- true
-				}
+				checkIndex(i, sequence)
 			}
 		}
 	}
