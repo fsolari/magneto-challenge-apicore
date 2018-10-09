@@ -11,7 +11,7 @@ import (
 
 func DNATest(dna domain.DNA) (bool, error) {
 
-	dna.Mutant = handleMatrix(dna)
+	dna.Mutant = isMutant(dna)
 
 	err := dao.InsertDNA(dna)
 	if err != nil {
@@ -21,7 +21,7 @@ func DNATest(dna domain.DNA) (bool, error) {
 	return dna.Mutant, err
 }
 
-func handleMatrix(dna domain.DNA) bool {
+func isMutant(dna domain.DNA) bool {
 	sequence := make(chan bool)
 	done := make(chan bool)
 	rows := len(dna.DNA)
