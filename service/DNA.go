@@ -90,6 +90,7 @@ func loopDiagonally(dnaMatrix [][]rune, rows int, sequence chan bool, done chan 
 			}
 		}
 	}
+	time.Sleep(3 * time.Millisecond)
 	done <- true
 }
 
@@ -124,7 +125,6 @@ func handleMatrix(dna domain.DNA) bool {
 				return true
 			}
 		case <-done:
-			time.Sleep(2 * time.Millisecond)
 			if i == 2 {
 				return false
 			}
