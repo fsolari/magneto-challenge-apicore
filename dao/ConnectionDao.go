@@ -31,7 +31,14 @@ func Connect() (*sql.DB, error) {
 func getConfiguration() (domain.Configuration, error) {
 	var config domain.Configuration
 
-	u, err := url.Parse(os.Getenv("JAWSDB_URL"))
+	var dbURL string
+	if os.Getenv("GIN_MODE") == "release" {
+		dbURL = "JAWSDB_URL"
+	} else {
+		dbURL = "LOCALDB_URL"
+	}
+
+	u, err := url.Parse(os.Getenv(dbURL))
 	if err != nil {
 		panic(err)
 	}
