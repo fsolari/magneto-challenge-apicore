@@ -11,7 +11,7 @@ func StringArrayContains(s []string, e string) bool {
 	return false
 }
 
-func stringToRunesArray(s string) []rune {
+func StringToRuneArray(s string) []rune {
 	var runes []rune
 
 	for _, rune := range s {
@@ -25,7 +25,7 @@ func GenerateMatrixFromStringArray(a []string) [][]rune {
 	matrix := [][]rune{}
 
 	for _, s := range a {
-		runes := stringToRunesArray(s)
+		runes := StringToRuneArray(s)
 		matrix = append(matrix, runes)
 	}
 	return matrix
