@@ -5,6 +5,6 @@ import (
 	"net/http"
 )
 
-func Home(c *gin.Context){
-	c.HTML(http.StatusOK, "index.tmpl.html", nil)
+func Home(c *gin.Context) {
+	c.JSON(http.StatusOK, "Welcome to Magneto API. For usage see: https://github.com/fsolari/magneto-challenge-apicore")
 }
