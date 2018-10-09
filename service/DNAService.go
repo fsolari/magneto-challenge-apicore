@@ -63,7 +63,7 @@ func loopHorizontally(dnaMatrix [][]rune, rows int, columns int, sequence chan b
 				i = 0
 				break
 			}
-			util.ReachIndexSendTrue(i, 3, sequence)
+			onSequenceSendTrue(i, 3, sequence)
 		}
 	}
 	done <- true
@@ -82,7 +82,7 @@ func loopVertically(dnaMatrix [][]rune, rows int, columns int, sequence chan boo
 				i = 0
 				break
 			}
-			util.ReachIndexSendTrue(i, 3, sequence)
+			onSequenceSendTrue(i, 3, sequence)
 		}
 	}
 	done <- true
@@ -101,7 +101,7 @@ func loopDiagonally(dnaMatrix [][]rune, rows int, sequence chan bool, done chan 
 					i = 0
 					break
 				}
-				util.ReachIndexSendTrue(i, 3, sequence)
+				onSequenceSendTrue(i, 3, sequence)
 			}
 		}
 	}
@@ -114,4 +114,10 @@ func checkCondition(a rune, b rune, i int) bool {
 		return true
 	}
 	return false
+}
+
+func onSequenceSendTrue(i int, j int, channel chan bool) {
+	if i == j {
+		channel <- true
+	}
 }
