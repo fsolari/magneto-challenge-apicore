@@ -35,7 +35,6 @@ func getConfiguration() (domain.Configuration, error) {
 	if err != nil {
 		panic(err)
 	}
-
 	config.Engine = u.Scheme
 	config.User = u.User.Username()
 	config.Password, _ = u.User.Password()

@@ -7,17 +7,17 @@ import (
 	"math"
 )
 
-func CalculateStats() (domain.Stats, error) {
-	var stats domain.Stats
-	stats, err := dao.GetStats()
+func CalculateDNAStats() (domain.DNAStats, error) {
+	var stats domain.DNAStats
+	stats, err := dao.GetDNAStats()
 	if err != nil {
-		log.Printf("ERROR", err)
+		log.Printf("[StatsService.CalculateDNAStats] Error getting DNA stats from DB : %s \n", err)
 		return stats, err
 	}
 	stats.Ratio = (math.Floor(CalculateRatio(stats)*100)/100)
 	return stats, nil
 }
 
-func CalculateRatio(stats domain.Stats) float64 {
+func CalculateRatio(stats domain.DNAStats) float64 {
 	return float64(stats.CountHumanDna) / float64(stats.CountMutantDna)
 }

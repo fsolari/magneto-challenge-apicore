@@ -7,12 +7,12 @@ import (
 	"github.com/mercadolibre/magneto-challenge-apicore/service"
 )
 
-func GetStats(c *gin.Context) {
+func GetDNAStats(c *gin.Context) {
 
-	stats, err := service.CalculateStats()
+	stats, err := service.CalculateDNAStats()
 
 	if err != nil {
-		log.Printf("Error calculating stats %v\n", err)
+		log.Printf("[StatsHandler.GetDNAStats] Error calculating DNA stats %v\n", err)
 		c.JSON(http.StatusInternalServerError, err)
 		return
 	}

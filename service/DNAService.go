@@ -15,7 +15,7 @@ func DNATest(dna domain.DNA) (bool, error) {
 
 	err := dao.InsertDNA(dna)
 	if err != nil {
-		log.Printf("Error saving DNA registry on DB : %v\n", err)
+		log.Printf("[DNAService.DNATest] Error inserting DNA on DB : %s ", err)
 	}
 
 	return dna.Mutant, err
@@ -63,7 +63,7 @@ func loopHorizontally(dnaMatrix [][]rune, rows int, columns int, sequence chan b
 				i = 0
 				break
 			}
-			go util.ReachIndexSendTrue(i, 3, sequence)
+			util.ReachIndexSendTrue(i, 3, sequence)
 		}
 	}
 	done <- true
@@ -82,7 +82,7 @@ func loopVertically(dnaMatrix [][]rune, rows int, columns int, sequence chan boo
 				i = 0
 				break
 			}
-			go util.ReachIndexSendTrue(i, 3, sequence)
+			util.ReachIndexSendTrue(i, 3, sequence)
 		}
 	}
 	done <- true
@@ -101,7 +101,7 @@ func loopDiagonally(dnaMatrix [][]rune, rows int, sequence chan bool, done chan 
 					i = 0
 					break
 				}
-				go util.ReachIndexSendTrue(i, 3, sequence)
+				util.ReachIndexSendTrue(i, 3, sequence)
 			}
 		}
 	}

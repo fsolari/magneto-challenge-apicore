@@ -7,19 +7,20 @@ import (
 	"github.com/mercadolibre/magneto-challenge-apicore/service"
 )
 
-func IsMutant(c *gin.Context) {
+func GetDNATest(c *gin.Context) {
 	var dna domain.DNA
 	bindErr := c.BindJSON(&dna)
 
 	if bindErr != nil || !domain.IsDNAValid(dna) {
-		err := "Failed to process request: DNA format invalid."
+		err := "[MutantHandler.GetDNATest] Error processing request: DNA format invalid."
 		c.JSON(http.StatusBadRequest, err)
 		return
 	}
 
 	isMutant, err := service.DNATest(dna)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, err.Error())
+		c.JSON(http.StatusBadRequest, err)
+		return
 	}
 
 	if !isMutant {

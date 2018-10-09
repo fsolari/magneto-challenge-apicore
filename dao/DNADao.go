@@ -6,15 +6,20 @@ import (
 	"strings"
 )
 
-func GetStats() (domain.Stats, error) {
-	db, _ := Connect()
+func GetDNAStats() (domain.DNAStats, error) {
+	db, err := Connect()
 	defer db.Close()
 
-	var stats domain.Stats
+	var stats domain.DNAStats
+
+	if err != nil {
+		log.Printf("[DNADao.GetDNAStats] Error opening DB connection: %s ", err)
+		return stats, err
+	}
 
 	tx, err := db.Prepare("select count(ID) from Mutant where Mutant = ? ")
 	if err != nil {
-		log.Printf("Failed to prepare query %s", err)
+		log.Printf("[DNADao.GetDNAStats] Error preparing transaction %s", err)
 		return stats, err
 	}
 
@@ -22,7 +27,7 @@ func GetStats() (domain.Stats, error) {
 	err = tx.QueryRow("1").Scan(&stats.CountMutantDna)
 
 	if err != nil {
-		log.Printf("Failed to run query %s", err)
+		log.Printf("[DNADao.GetDNAStats] Error running query %s", err)
 		return stats, err
 	}
 
@@ -34,20 +39,20 @@ func InsertDNA(dna domain.DNA) error {
 	defer db.Close()
 
 	if err != nil {
-		log.Printf("ERROR", err)
+		log.Printf("[DNADao.InsertDNA] Error opening DB connection: %s ", err)
 		return err
 	}
 
 	stmt, err := db.Prepare("INSERT INTO Mutant(DNA, Mutant) VALUES(?, ?)")
 	if err != nil {
-		log.Printf("ERROR", err)
+		log.Printf(" [DNADao.InsertDNA] Error preparing statement B : %s ", err)
 		return err
 	}
 
 	dnaString := strings.Join(dna.DNA, " ")
 	_, err = stmt.Exec(dnaString, dna.Mutant)
 	if err != nil {
-		log.Printf("ERROR", err)
+		log.Printf("[DNADao.InsertDNA] Error executing statement : %s ", err)
 		return err
 	}
 	return nil
