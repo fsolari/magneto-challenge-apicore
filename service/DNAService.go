@@ -102,7 +102,7 @@ func loopDiagonally(DNA [][]rune, sequence chan bool, done chan bool) {
 				}
 				onSequenceSendTrue(i, 3, sequence)
 			}
-		}m
+		}
 	}
 	time.Sleep(3 * time.Millisecond)
 	done <- true
