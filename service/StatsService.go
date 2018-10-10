@@ -21,3 +21,5 @@ func CalculateDNAStats() (domain.DNAStats, error) {
 func CalculateRatio(stats domain.DNAStats) float64 {
 	return float64(stats.CountHumanDna) / float64(stats.CountMutantDna)
 }
+
+

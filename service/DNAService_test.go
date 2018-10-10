@@ -36,7 +36,9 @@ func TestDNATestMustReturnFalseIfDNAIsPresent(t *testing.T) {
 	ok, err := DNATest(dna)
 
 	assert.Equal(t, false, ok, fmt.Sprintf("ok must be false %v", ok))
-	assert.Nil(t, err, fmt.Sprintf("ok must be false %v", ok))
+	assert.Nil(t, err, fmt.Sprintf("err must be nil %v", err))
+
+	dao.DeleteDNA(dna)
 
 }
 
