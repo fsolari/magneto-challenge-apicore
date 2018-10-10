@@ -5,4 +5,4 @@ build:
     - go
 
 run:
-  web: magneto-challenge-apicore
+  web: magneto-challenge-apicore/src/api
