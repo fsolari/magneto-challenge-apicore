@@ -12,10 +12,12 @@ type DNA struct {
 }
 
 func IsDNAValid(dna DNA) bool {
+	var rows, cols int = len(dna.DNA), len(dna.DNA[0])
 
-	if len(dna.DNA) < 3 {
+	if rows < 3 || rows != cols {
 		return false
 	}
+
 	for _, str := range dna.DNA {
 		for _, char := range str {
 			if !util.StringArrayContains(DNACharSet, string(char)) {
