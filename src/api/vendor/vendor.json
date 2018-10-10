@@ -95,7 +95,7 @@
 			"revisionTime": "2017-08-26T15:59:43Z"
 		},
 		{
-			"checksumSHA1": "XIt75royO77B3XRYyViU7tng2xM=",
+			"checksumSHA1": "A+9lemYS6e/BXlyFTsm9CeK5dKU=",
 			"path": "golang.org/x/sys/unix",
 			"revision": "062cd7e4e68206d8bab9b18396626e855c992658",
 			"revisionTime": "2017-09-12T16:19:26Z"
@@ -113,5 +113,5 @@
 			"revisionTime": "2017-08-12T16:00:11Z"
 		}
 	],
-	"rootPath": "github.com/mercadolibre/magneto-challenge-apicore"
+	"rootPath": "github.com/mercadolibre/magneto-challenge-apicore/src/api"
 }
