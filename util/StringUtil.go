@@ -30,3 +30,7 @@ func GenerateMatrixFromStringArray(a []string) [][]rune {
 	}
 	return matrix
 }
+
+func JoinStringArray(arr []string) string {
+	return strings.Join(arr, " ")
+}
