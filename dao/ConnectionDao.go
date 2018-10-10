@@ -32,7 +32,8 @@ func getConfiguration() (domain.Configuration, error) {
 	var config domain.Configuration
 
 	var dbURL string
-	if os.Getenv("GIN_MODE") == "release" {
+
+	if os.Getenv("ENV") == "production" {
 		dbURL = "JAWSDB_URL"
 	} else {
 		dbURL = "LOCALDB_URL"
