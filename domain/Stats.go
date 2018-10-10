@@ -5,7 +5,3 @@ type DNAStats struct {
 	CountHumanDna  int `json:"count_human_dna"`
 	Ratio          float64 `json:"ratio"`
 }
-
-type Count struct {
-	count int
-}
