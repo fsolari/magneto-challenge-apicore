@@ -8,7 +8,7 @@ import (
 	"strings"
 	"fmt"
 	"net/url"
-	"github.com/mercadolibre/magneto-challenge-apicore/src/domain"
+	"github.com/mercadolibre/magneto-challenge-apicore/src/api/domain"
 	"net"
 )
 
