@@ -4,6 +4,8 @@ import (
 	"testing"
 	"github.com/stretchr/testify/assert"
 	"fmt"
+	"github.com/mercadolibre/magneto-challenge-apicore/domain"
+	"github.com/mercadolibre/magneto-challenge-apicore/dao"
 )
 
 func TestIsMutantMustReturnTrueIfDNAMutant(t *testing.T) {
@@ -22,6 +24,20 @@ func TestIsMutantMustReturnFalseIfDNAHuman(t *testing.T) {
 	ok := isMutant(matrix, len(matrix))
 
 	assert.Equal(t, false, ok, fmt.Sprintf("ok must be false %v", ok))
+}
+
+func TestDNATestMustReturnFalseIfDNAIsPresent(t *testing.T) {
+	var dna domain.DNA
+	dna.DNA = []string{"TTGCTA", "CTGTGC", "TTATGT", "AGTAGG", "ACCCTA", "TCACTG"}
+	dna.Mutant = false
+
+	dao.InsertDNA(dna)
+
+	ok, err := DNATest(dna)
+
+	assert.Equal(t, false, ok, fmt.Sprintf("ok must be false %v", ok))
+	assert.Nil(t, err, fmt.Sprintf("ok must be false %v", ok))
+
 }
 
 func TestLoopHorizontallyMustSendToChannelSequenceBeforeDone(t *testing.T) {
@@ -104,7 +120,7 @@ func TestLoopDiagonallyMustSendToChannelSequenceBeforeDone(t *testing.T) {
 
 func TestLoopDiagonallyIfNoSequenceMustSendToDoneChannel(t *testing.T) {
 	var matrix = [][]rune{{71, 65, 71, 67, 71, 65}, {65, 65, 71, 84, 71, 67}, {65, 84, 65, 84, 71, 84}, {65, 71, 65, 67, 65, 71}, {67, 67, 67, 67, 84, 65}, {84, 67, 65, 67, 84, 71}}
-	
+
 	sequence := make(chan bool)
 	done := make(chan bool)
 
@@ -114,16 +130,6 @@ func TestLoopDiagonallyIfNoSequenceMustSendToDoneChannel(t *testing.T) {
 
 	assert.Equal(t, false, ok, fmt.Sprintf("ok must be false %v", ok))
 }
-
-func TestCheckConditionIfMeetConditionReturnTrue(t *testing.T) {}
-
-func TestCheckConditionIfFailsConditionReturnFalse(t *testing.T) {}
-
-func TestOnSequenceSendTrueMustSendToChannelIfIndexEqual(t *testing.T) {}
-
-func TestChannelReaderMustReturnTrueIfChannelAIsDoneFirst(t *testing.T) {}
-
-func TestChannelReaderMustReturnFalseIfChannelBIsDone(t *testing.T) {}
 
 func readChannels(seq chan bool, done chan bool) bool {
 	select {
