@@ -2,7 +2,7 @@ package app
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/mercadolibre/magneto-challenge-apicore/handler"
+	"github.com/mercadolibre/magneto-challenge-apicore/src/handler"
 )
 
 func mapUrls(router *gin.Engine) {

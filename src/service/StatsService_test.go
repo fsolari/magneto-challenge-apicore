@@ -4,8 +4,8 @@ import (
 	"testing"
 	"github.com/stretchr/testify/assert"
 	"fmt"
-	"github.com/mercadolibre/magneto-challenge-apicore/domain"
-	"github.com/mercadolibre/magneto-challenge-apicore/dao"
+	"github.com/mercadolibre/magneto-challenge-apicore/src/domain"
+	"github.com/mercadolibre/magneto-challenge-apicore/src/dao"
 )
 
 func TestCalculateDNAStatsShouldReturnStats(t *testing.T) {

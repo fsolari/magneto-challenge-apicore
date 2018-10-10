@@ -7,7 +7,7 @@ import (
 	"strings"
 	"log"
 	"net/http"
-	"github.com/mercadolibre/magneto-challenge-apicore/app"
+	"github.com/mercadolibre/magneto-challenge-apicore/src/app"
 )
 
 func TestPingMustReturnPong(t *testing.T) {

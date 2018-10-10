@@ -1,10 +1,10 @@
 package service
 
 import (
-	"github.com/mercadolibre/magneto-challenge-apicore/domain"
-	"github.com/mercadolibre/magneto-challenge-apicore/dao"
+	"github.com/mercadolibre/magneto-challenge-apicore/src/domain"
+	"github.com/mercadolibre/magneto-challenge-apicore/src/dao"
 	"time"
-	"github.com/mercadolibre/magneto-challenge-apicore/util"
+	"github.com/mercadolibre/magneto-challenge-apicore/src/util"
 )
 
 func DNATest(dna domain.DNA) (bool, error) {

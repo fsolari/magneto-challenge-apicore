@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"github.com/gin-gonic/gin"
 	"log"
-	"github.com/mercadolibre/magneto-challenge-apicore/service"
+	"github.com/mercadolibre/magneto-challenge-apicore/src/service"
 )
 
 func GetDNAStats(c *gin.Context) {
