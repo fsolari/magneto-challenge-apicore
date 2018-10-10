@@ -1,7 +1,7 @@
 package domain
 
 import (
-	"github.com/mercadolibre/magneto-challenge-apicore/src/api/util"
+	"github.com/mercadolibre/magneto-challenge-apicore/util"
 )
 
 var DNACharSet = []string{"A", "T", "C", "G"}

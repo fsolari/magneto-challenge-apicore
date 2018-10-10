@@ -1,9 +1,9 @@
 package dao
 
 import (
-	"github.com/mercadolibre/magneto-challenge-apicore/src/api/domain"
+	"github.com/mercadolibre/magneto-challenge-apicore/domain"
 	"log"
-	"github.com/mercadolibre/magneto-challenge-apicore/src/api/util"
+	"github.com/mercadolibre/magneto-challenge-apicore/util"
 	"database/sql"
 )
 

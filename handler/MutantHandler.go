@@ -3,8 +3,8 @@ package handler
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"github.com/mercadolibre/magneto-challenge-apicore/src/api/domain"
-	"github.com/mercadolibre/magneto-challenge-apicore/src/api/service"
+	"github.com/mercadolibre/magneto-challenge-apicore/domain"
+	"github.com/mercadolibre/magneto-challenge-apicore/service"
 )
 
 func GetDNATest(c *gin.Context) {

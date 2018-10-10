@@ -4,8 +4,8 @@ import (
 	"testing"
 	"github.com/stretchr/testify/assert"
 	"fmt"
-	"github.com/mercadolibre/magneto-challenge-apicore/src/api/domain"
-	"github.com/mercadolibre/magneto-challenge-apicore/src/api/dao"
+	"github.com/mercadolibre/magneto-challenge-apicore/domain"
+	"github.com/mercadolibre/magneto-challenge-apicore/dao"
 )
 
 func TestIsMutantMustReturnTrueIfDNAMutant(t *testing.T) {
