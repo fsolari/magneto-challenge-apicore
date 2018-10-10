@@ -1,10 +1,10 @@
 package service
 
 import (
-	"github.com/mercadolibre/magneto-challenge-apicore/domain"
 	"github.com/mercadolibre/magneto-challenge-apicore/dao"
-	"time"
+	"github.com/mercadolibre/magneto-challenge-apicore/domain"
 	"github.com/mercadolibre/magneto-challenge-apicore/util"
+	"time"
 )
 
 func DNATest(dna domain.DNA) (bool, error) {
@@ -59,9 +59,9 @@ func loopHorizontally(DNA [][]rune, cols int, sequence chan bool, done chan bool
 
 	for x = 0; x < cols; x++ {
 
-		for y = 0; y < len(DNA) - 1; y++ {
+		for y = 0; y < len(DNA)-1; y++ {
 
-			if checkCondition(DNA[x][y], DNA[x][y + 1], i) {
+			if checkCondition(DNA[x][y], DNA[x][y+1], i) {
 				i++
 			} else {
 				i = 0
@@ -78,9 +78,9 @@ func loopVertically(DNA [][]rune, cols int, sequence chan bool, done chan bool) 
 
 	for y = 0; y < len(DNA); y++ {
 
-		for x = 0; x < cols - 1; x++ {
+		for x = 0; x < cols-1; x++ {
 
-			if checkCondition(DNA[x][y], DNA[x + 1][y], i) {
+			if checkCondition(DNA[x][y], DNA[x+1][y], i) {
 				i++
 			} else {
 				i = 0
@@ -96,10 +96,10 @@ func loopDiagonally(DNA [][]rune, sequence chan bool, done chan bool) {
 
 	var x, y, i int
 
-	for x = 0; x < len(DNA) - 1; x++ {
-		for y = 0; y < len(DNA) - 1; y++ {
+	for x = 0; x < len(DNA)-1; x++ {
+		for y = 0; y < len(DNA)-1; y++ {
 			if x == y {
-				if checkCondition(DNA[x][y], DNA[x + 1][y + 1], i) {
+				if checkCondition(DNA[x][y], DNA[x+1][y+1], i) {
 					i++
 				} else {
 					i = 0

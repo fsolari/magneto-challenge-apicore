@@ -1,10 +1,10 @@
 package dao
 
 import (
-	"github.com/mercadolibre/magneto-challenge-apicore/domain"
-	"log"
-	"github.com/mercadolibre/magneto-challenge-apicore/util"
 	"database/sql"
+	"github.com/mercadolibre/magneto-challenge-apicore/domain"
+	"github.com/mercadolibre/magneto-challenge-apicore/util"
+	"log"
 )
 
 func GetDNAStats() (domain.DNAStats, error) {
@@ -46,7 +46,7 @@ func GetDNAStats() (domain.DNAStats, error) {
 	return stats, nil
 }
 
-func GetDNA(dna domain.DNA) (error) {
+func GetDNA(dna domain.DNA) error {
 	db, err := Connect()
 	defer db.Close()
 
