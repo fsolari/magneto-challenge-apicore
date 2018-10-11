@@ -2,44 +2,37 @@ package handler
 
 import (
 	"testing"
-	"github.com/stretchr/testify/assert"
 	"net/http/httptest"
-	"strings"
-	"log"
 	"net/http"
-	"github.com/mercadolibre/magneto-challenge-apicore/app"
+	"github.com/gin-gonic/gin"
+	"github.com/stretchr/testify/assert"
+	"strings"
 )
 
 func TestPingMustReturnPong(t *testing.T) {
 
 	url := "/ping"
-	r := executeRequest("GET", url, "")
+	r := handlerTest("GET", url, "")
 
 	assert.Equal(t, 200, r.Code)
 	assert.Equal(t, "pong", r.Body.String())
 
 }
 
+func handlerTest(method string, url string, body string) *httptest.ResponseRecorder {
+	router := gin.Default()
+	MapUrls(router)
 
-func executeRequest(method string, url string, body string) *httptest.ResponseRecorder {
-	var request *http.Request
-	var err error
-
-	Router := app.SetupRouter()
-
-	response := httptest.NewRecorder()
+	var req *http.Request
 
 	if body != "" {
-		request, err = http.NewRequest(method, url, strings.NewReader(body))
+		req, _ = http.NewRequest(method, url, strings.NewReader(body))
 	} else {
-		request, err = http.NewRequest(method, url, nil)
+		req, _ = http.NewRequest(method, url, nil)
 	}
 
-	if err != nil {
-		log.Printf("[TestUtil.ExecuteRequest] Error executing http request with body to : %s " + url, err)
-	}
+	rr := httptest.NewRecorder()
+	router.ServeHTTP(rr, req)
 
-	Router.ServeHTTP(response, request)
-
-	return response
+	return rr
 }
