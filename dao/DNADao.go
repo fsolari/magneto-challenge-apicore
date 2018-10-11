@@ -5,6 +5,8 @@ import (
 	"github.com/mercadolibre/magneto-challenge-apicore/domain"
 	"github.com/mercadolibre/magneto-challenge-apicore/util"
 	"log"
+	"reflect"
+	"math"
 )
 
 func GetDNAStats() (domain.DNAStats, error) {
@@ -19,7 +21,7 @@ func GetDNAStats() (domain.DNAStats, error) {
 		return stats, err
 	}
 
-	tx, err := db.Prepare("select count(ID) from Mutant where Mutant = ? ")
+	tx, err := db.Prepare("select IFNULL(count(ID),0) from Mutant where Mutant = ? ")
 	if err != nil {
 		log.Printf("[DNADao.GetDNAStats] Error preparing transaction %s", err)
 		return stats, err

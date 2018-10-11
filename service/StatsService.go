@@ -5,6 +5,7 @@ import (
 	"github.com/mercadolibre/magneto-challenge-apicore/domain"
 	"log"
 	"math"
+	"reflect"
 )
 
 func CalculateDNAStats() (domain.DNAStats, error) {
@@ -14,7 +15,11 @@ func CalculateDNAStats() (domain.DNAStats, error) {
 		log.Printf("[StatsService.CalculateDNAStats] Error getting DNA stats from DB : %s \n", err)
 		return stats, err
 	}
-	stats.Ratio = (math.Floor(CalculateRatio(stats)*100) / 100)
+	stats.Ratio = (math.Floor(CalculateRatio(stats) * 100) / 100)
+	if reflect.TypeOf(stats.Ratio) == reflect.TypeOf(math.NaN()) {
+		stats.Ratio = 0
+	}
+
 	return stats, nil
 }
 
