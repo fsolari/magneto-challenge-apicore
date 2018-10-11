@@ -2,9 +2,6 @@ package util
 
 import (
 	"strings"
-	"time"
-	"math/rand"
-	"github.com/heroku/go-getting-started/domain"
 )
 
 func StringArrayContains(s []string, e string) bool {
