@@ -6,16 +6,17 @@ import (
 	"net/http"
 	"os"
 	"fmt"
+	"github.com/mercadolibre/magneto-challenge-apicore/handler"
 )
 
 func Start() {
-	SetupRouter()
+	setupRouter()
 	loggerConfig()
 }
 
-func SetupRouter() *gin.Engine {
+func setupRouter() *gin.Engine {
 	router := gin.Default()
-	mapUrls(router)
+	handler.MapUrls(router)
 
 	s := &http.Server{
 		Addr:           getPort(),
