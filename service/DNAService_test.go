@@ -26,17 +26,17 @@ func TestIsMutantMustReturnFalseIfDNAHuman(t *testing.T) {
 	assert.Equal(t, false, ok, fmt.Sprintf("ok must be false %v", ok))
 }
 
-func TestDNATestMustReturnFalseIfDNAIsPresent(t *testing.T) {
+func TestDNATestMustReturnFalseAndErrorIfDNAIsPresent(t *testing.T) {
 	var dna domain.DNA
-	dna.DNA = []string{"TTGCTA", "CTGTGC", "TTATGT", "AGTAGG", "ACCCTA", "TCACTG"}
-	dna.Mutant = false
+	dna.DNA = []string{"TTTTTA", "CTGTGC", "TTATGT", "AGTAGG", "ACCCTA", "TCACTG"}
+	dna.Mutant = true
 
 	dao.InsertDNA(dna)
 
 	ok, err := DNATest(dna)
 
 	assert.Equal(t, false, ok, fmt.Sprintf("ok must be false %v", ok))
-	assert.Nil(t, err, fmt.Sprintf("err must be nil %v", err))
+	assert.NotNil(t, err, fmt.Sprintf("err must be nil %v", err))
 
 	dao.DeleteDNA(dna)
 
@@ -132,6 +132,7 @@ func TestLoopDiagonallyIfNoSequenceMustSendToDoneChannel(t *testing.T) {
 
 	assert.Equal(t, false, ok, fmt.Sprintf("ok must be false %v", ok))
 }
+
 
 func readChannels(seq chan bool, done chan bool) bool {
 	select {
