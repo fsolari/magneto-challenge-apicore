@@ -45,41 +45,35 @@ Benchmarking was done using [pla](http://github.com/mercadolibre/pla)
 
 **Summary:**
 
-  Total:	43.9388 secs.  
-  Slowest:	1.2116 secs.  
-  Fastest:	0.2885 secs.  
-  Average:	0.4311 secs.
+  Total:  239.5674 secs.  
+  Slowest:  1.4562 secs.  
+  Fastest:  0.1817 secs.  
+  Average:  0.2395 secs.  
   
-  Requests/sec:	227.5895  
-  Total Data Received:	624657 bytes.  
-  Response Size per Request:	62 bytes.
- 
-**Status code distribution:**
-
-   [200]	4708 responses  
-   [403]	26 responses  
-   [400]	5266 responses  
+  Requests/sec: 41.7419  
+  Total Data Received:  56525 bytes.  
+  Response Size per Request:  5 bytes.
 
 **Response time histogram:**
 
-  0.310 [12]	|  
-  0.369 [116]	|  
-  0.425 [9546]	|∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎  
-  0.538 [155]	|  
-  0.591 [45]	|  
-  0.674 [37]	|  
-  0.743 [42]	|  
-  0.813 [20]	|  
-  0.875 [26]	|  
-  1.212 [1]	|
+  0.227 [9469]  |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎  
+  0.383 [304] |∎  
+  0.481 [92]  |  
+  0.612 [112] |  
+  0.716 [13]  |  
+  0.819 [1] |  
+  0.904 [2] |  
+  0.992 [3] |    
+  1.082 [2] |  
+  1.441 [2] |
 
 **Latency distribution:**
   
-  10% in 0.4251 secs.  
-  25% in 0.4251 secs.  
-  50% in 0.4251 secs.  
-  75% in 0.4251 secs.  
-  90% in 0.4251 secs.  
-  95% in 0.4251 secs.  
-  99% in 0.6744 secs.
+  10% in 0.2266 secs.  
+  25% in 0.2266 secs.  
+  50% in 0.2266 secs.  
+  75% in 0.2266 secs.  
+  90% in 0.2266 secs.  
+  95% in 0.3832 secs.  
+  99% in 0.6122 secs.
 
