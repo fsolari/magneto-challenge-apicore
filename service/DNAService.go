@@ -89,6 +89,7 @@ func loopVertically(DNA [][]rune, cols int, sequence chan bool, done chan bool) 
 			onSequenceSendTrue(i, 3, sequence)
 		}
 	}
+	time.Sleep(1 * time.Millisecond)
 	done <- true
 }
 
@@ -109,7 +110,7 @@ func loopDiagonally(DNA [][]rune, sequence chan bool, done chan bool) {
 			}
 		}
 	}
-	time.Sleep(3 * time.Millisecond)
+	time.Sleep(1 * time.Millisecond)
 	done <- true
 }
 
