@@ -5,8 +5,6 @@ import (
 	"github.com/mercadolibre/magneto-challenge-apicore/domain"
 	"github.com/mercadolibre/magneto-challenge-apicore/util"
 	"log"
-	"reflect"
-	"math"
 )
 
 func GetDNAStats() (domain.DNAStats, error) {
