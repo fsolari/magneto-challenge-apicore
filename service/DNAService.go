@@ -9,10 +9,10 @@ import (
 
 func DNATest(dna domain.DNA) (bool, error) {
 
-	err := dao.GetDNA(dna)
+/*	err := dao.GetDNA(dna)
 	if err != nil {
 		return false, err
-	}
+	}*/
 
 	cols := len(dna.DNA[0])
 	DNA := util.GenerateMatrixFromStringArray(dna.DNA)
