@@ -12,31 +12,29 @@ func GetDNAStats() (domain.DNAStats, error) {
 	defer db.Close()
 
 	var stats domain.DNAStats
-	var count [2]int
+	var count = []int{0, 0}
 
 	if err != nil {
 		log.Printf("[DNADao.GetDNAStats] Error opening DB connection: %s ", err)
 		return stats, err
 	}
 
-	tx, err := db.Prepare("select count(ID) from Mutant where Mutant = ? ")
+	tx, err := db.Prepare("select IFNULL(count(ID),0) from Mutant where Mutant = ? ")
 	if err != nil {
 		log.Printf("[DNADao.GetDNAStats] Error preparing transaction %s", err)
 		return stats, err
 	}
 
 	for i := 0; i <= 1; i++ {
-		for j := range count {
-			err = tx.QueryRow(string(i)).Scan(&count[j])
-			switch err {
-			case sql.ErrNoRows:
-				count[j] = 0
-			case nil:
-				continue
-			default:
-				log.Printf("[DNADao.GetDNAStats] Error running query %s", err)
-				return stats, err
-			}
+		err = tx.QueryRow(i).Scan(&count[i])
+		switch err {
+		case sql.ErrNoRows:
+			count[i] = 0
+		case nil:
+			break
+		default:
+			log.Printf("[DNADao.GetDNAStats] Error running query %s", err)
+			return stats, err
 		}
 	}
 

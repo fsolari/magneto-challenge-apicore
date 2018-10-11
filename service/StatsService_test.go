@@ -31,3 +31,13 @@ func TestCalculateDNAStatsShouldReturnStats(t *testing.T) {
 	}
 
 }
+
+func TestCalculateDNAStatsShouldReturnStatsZeroIfNoStats(t *testing.T) {
+
+	stats, err := CalculateDNAStats()
+
+	assert.Equal(t, 0, stats.CountHumanDna, fmt.Sprintf("CountHumanDna must be 1 %v", stats.CountHumanDna))
+	assert.Equal(t, 0, stats.CountMutantDna, fmt.Sprintf("CountMutantDna must be 1 %v", stats.CountMutantDna))
+	assert.Equal(t, float64(0), stats.Ratio, fmt.Sprintf("Ratio must be 1 %v", stats.Ratio))
+	assert.Nil(t, err, fmt.Sprintf("err must be nil %v", err))
+}

@@ -14,10 +14,14 @@ func CalculateDNAStats() (domain.DNAStats, error) {
 		log.Printf("[StatsService.CalculateDNAStats] Error getting DNA stats from DB : %s \n", err)
 		return stats, err
 	}
-	stats.Ratio = (math.Floor(CalculateRatio(stats)*100) / 100)
+	stats.Ratio = calculateRatio(stats)
+
 	return stats, nil
 }
 
-func CalculateRatio(stats domain.DNAStats) float64 {
-	return float64(stats.CountHumanDna) / float64(stats.CountMutantDna)
+func calculateRatio(stats domain.DNAStats) float64 {
+	if stats.CountMutantDna == 0 || stats.CountHumanDna == 0 {
+		return 0
+	}
+	return math.Floor((float64(stats.CountHumanDna) / float64(stats.CountMutantDna)) * 100) / 100
 }

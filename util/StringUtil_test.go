@@ -33,11 +33,11 @@ func TestStringToRuneArrayMustReturnRuneArray(t *testing.T) {
 	assert.Equal(t, r, ok, fmt.Sprintf("ok must be in rune array type %v", ok))
 }
 
-func TestGenerateMatrixFromStringArrayMustReturnRuneMatrix(t *testing.T) {
-	var arr = []string{"TTGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"}
-	var matrix = [][]rune{{84, 84, 71, 67, 71, 65}, {67, 65, 71, 84, 71, 67}, {84, 84, 65, 84, 71, 84}, {65, 71, 65, 65, 71, 71}, {67, 67, 67, 67, 84, 65}, {84, 67, 65, 67, 84, 71}}
+func TestJoinStringArrayMustReturnStringJoined(t *testing.T) {
 
-	ok := GenerateMatrixFromStringArray(arr)
+	var a = []string{"H", "E", "L", "L", "O"}
+	var c = "H E L L O"
 
-	assert.Equal(t, matrix, arr, fmt.Sprintf("ok must be matrix rune type %v", ok))
+	ok := JoinStringArray(a)
+	assert.Equal(t, ok, c, fmt.Sprintf("ok must equal c %v %v", ok, c))
 }
