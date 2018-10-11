@@ -25,12 +25,3 @@ func calculateRatio(stats domain.DNAStats) float64 {
 	}
 	return math.Floor((float64(stats.CountHumanDna) / float64(stats.CountMutantDna)) * 100) / 100
 }
-
-/*
-
-func setZeroIfNaN(){
-	if reflect.TypeOf(stats.Ratio) == reflect.TypeOf(math.NaN()) {
-		stats.Ratio = 0
-	}
-}
-*/
