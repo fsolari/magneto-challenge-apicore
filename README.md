@@ -41,4 +41,45 @@ Response
 
 ## Benchmark
 
+Benchmarking was done using [pla](http://github.com/mercadolibre/pla) 
+
+**Summary:**
+
+  Total:	43.9388 secs.  
+  Slowest:	1.2116 secs.  
+  Fastest:	0.2885 secs.  
+  Average:	0.4311 secs.
+  
+  Requests/sec:	227.5895  
+  Total Data Received:	624657 bytes.  
+  Response Size per Request:	62 bytes.
+ 
+**Status code distribution:**
+
+   [200]	4708 responses  
+   [403]	26 responses  
+   [400]	5266 responses  
+
+**Response time histogram:**
+
+  0.310 [12]	|  
+  0.369 [116]	|  
+  0.425 [9546]	|∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎  
+  0.538 [155]	|  
+  0.591 [45]	|  
+  0.674 [37]	|  
+  0.743 [42]	|  
+  0.813 [20]	|  
+  0.875 [26]	|  
+  1.212 [1]	|
+
+**Latency distribution:**
+  
+  10% in 0.4251 secs.  
+  25% in 0.4251 secs.  
+  50% in 0.4251 secs.  
+  75% in 0.4251 secs.  
+  90% in 0.4251 secs.  
+  95% in 0.4251 secs.  
+  99% in 0.6744 secs.
 
