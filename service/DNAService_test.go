@@ -28,7 +28,7 @@ func TestIsMutantMustReturnFalseIfDNAHuman(t *testing.T) {
 
 func TestDNATestMustReturnFalseAndErrorIfDNAIsPresent(t *testing.T) {
 	var dna domain.DNA
-	dna.DNA = []string{"TTTTTA", "CTGTGC", "TTATGT", "AGTAGG", "ACCCTA", "TCACTG"}
+	dna.DNA = []string{"TTTCTA", "CTGTGC", "TTATGT", "AGTAGG", "ACCCTA", "TCACTG"}
 	dna.Mutant = true
 
 	dao.InsertDNA(dna)

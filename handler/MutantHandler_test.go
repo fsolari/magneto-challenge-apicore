@@ -7,12 +7,12 @@ import (
 	"github.com/mercadolibre/magneto-challenge-apicore/dao"
 )
 
-func TestGetDNATestMustReturn200IfMutant(t *testing.T) {
+func TestGetDNATestMustReturn200IfMutant(t *testing.T){
 
 	var dna domain.DNA
-	dna.DNA = []string{"TTGCTA", "CCCCAA", "TTATGT", "AGTAGG", "ACCCTA", "TCACTG"}
+	dna.DNA = []string{"ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"}
 
-	body := `{"dna":` + dna + `}`
+	body:= `{"dna":["ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"]}`
 	url := "/mutant"
 	r := handlerTest("POST", url, body)
 
@@ -22,12 +22,13 @@ func TestGetDNATestMustReturn200IfMutant(t *testing.T) {
 
 }
 
-func TestGetDNATestMustReturn403IfHuman(t *testing.T) {
+
+func TestGetDNATestMustReturn403IfHuman(t *testing.T){
 
 	var dna domain.DNA
 	dna.DNA = []string{"TTGCTA", "CTGTGC", "TTATGT", "AGTAGG", "ACCCTA", "TCACTG"}
 
-	body := `{"dna":` + dna + `}`
+	body:= `{"dna":["TTGCTA", "CTGTGC", "TTATGT", "AGTAGG", "ACCCTA", "TCACTG"]}`
 	url := "/mutant"
 	r := handlerTest("POST", url, body)
 
