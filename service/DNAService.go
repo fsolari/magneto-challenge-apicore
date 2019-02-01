@@ -99,7 +99,7 @@ func loopDiagonally(DNA [][]rune, sequence chan bool, done chan bool) {
 
 	for x = 0; x < len(DNA) - 1; x++ {
 		for y = 0; y < len(DNA) - 1; y++ {
-			if x == y {
+			if x >= y {
 				if checkCondition(DNA[x][y], DNA[x + 1][y + 1], i) {
 					i++
 				} else {
